@@ -1,0 +1,8 @@
+{
+  "cucumber.glue": [
+    "src/test/java/stepdefinitions/**/*.java"
+  ],
+  "cucumber.features": [
+    "src/test/resources/features/**/*.feature"
+  ]
+}
