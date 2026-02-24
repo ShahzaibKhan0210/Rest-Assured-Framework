@@ -7,10 +7,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class LoginStepDefinitions {
+
+    private static final Logger log = LoggerFactory.getLogger(LoginStepDefinitions.class);
 
     private String loginEndpoint;
     private RequestSpecification request;
@@ -28,6 +32,7 @@ public class LoginStepDefinitions {
         this.request = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON);
+        log.info("Login API endpoint set: {}", endpoint);
     }
 
     @When("I send a POST request to login with email {string} and password {string}")
@@ -36,7 +41,9 @@ public class LoginStepDefinitions {
                 "{\"email\":\"%s\",\"password\":\"%s\"}",
                 email, password
         );
+        log.info("POST Login -> {} | body: {}", loginEndpoint, body);
         response = request.body(body).when().post(loginEndpoint);
+        log.info("Login response status: {} | body: {}", response.getStatusCode(), response.body().asString());
     }
 
     @Given("the create agency API endpoint is {string}")
@@ -45,6 +52,7 @@ public class LoginStepDefinitions {
         this.request = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON);
+        log.info("Create agency API endpoint set: {}", endpoint);
     }
 
     @When("I send a POST request to create agency with name {string} address {string} phone {string} email {string}")
@@ -53,22 +61,28 @@ public class LoginStepDefinitions {
                 "{\"name\":\"%s\",\"address\":\"%s\",\"phone\":\"%s\",\"email\":\"%s\"}",
                 name, address, phone, email
         );
+        log.info("POST Create agency (no auth) -> {} | body: {}", loginEndpoint, body);
         response = request.body(body).when().post(loginEndpoint);
+        log.info("Create agency response status: {} | body: {}", response.getStatusCode(), response.body().asString());
     }
 
     @Then("the response status code is {int}")
     public void the_response_status_code_is(int expectedStatus) {
+        int actual = response.getStatusCode();
+        log.info("Assert response status: expected={}, actual={}", expectedStatus, actual);
         response.then().statusCode(expectedStatus);
     }
 
     @Then("the response body contains message {string}")
     public void the_response_body_contains_message(String expectedMessage) {
+        log.info("Assert response message: expected='{}'", expectedMessage);
         response.then().body("message", equalTo(expectedMessage));
     }
 
     @Then("I extract the access token from the login response and store it")
     public void i_extract_the_access_token_from_the_login_response_and_store_it() {
         accessToken = response.body().path("tokens.access.token");
+        log.info("Extracted and stored access token (length={})", accessToken != null ? accessToken.length() : 0);
     }
 
     @When("I send a POST request to create agency with Bearer token with name {string} address {string} phone {string} email {string}")
@@ -81,30 +95,36 @@ public class LoginStepDefinitions {
                 "{\"name\":\"%s\",\"address\":\"%s\",\"phone\":\"%s\",\"email\":\"%s\"}",
                 createName, createAddress, createPhone, createEmail
         );
+        log.info("POST Create agency (with Bearer) -> {} | body: {}", loginEndpoint, body);
         request = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .header("Authorization", "Bearer " + accessToken);
         response = request.body(body).when().post(loginEndpoint);
+        log.info("Create agency response status: {} | body: {}", response.getStatusCode(), response.body().asString());
     }
 
     @Then("I extract the agency id from the create response and store it")
     public void i_extract_the_agency_id_from_the_create_response_and_store_it() {
         agencyId = response.body().path("agency.id").toString();
+        log.info("Extracted and stored agency id: {}", agencyId);
     }
 
     @Given("the get agency by id API endpoint is {string}")
     public void the_get_agency_by_id_api_endpoint_is(String baseUrl) {
         this.loginEndpoint = baseUrl + "/" + agencyId;
+        log.info("Get agency by id endpoint set: {}", loginEndpoint);
     }
 
     @When("I send a GET request to get agency by id with Bearer token")
     public void i_send_a_get_request_to_get_agency_by_id_with_bearer_token() {
+        log.info("GET agency by id -> {}", loginEndpoint);
         request = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .header("Authorization", "Bearer " + accessToken);
         response = request.when().get(loginEndpoint);
+        log.info("Get agency response status: {} | body: {}", response.getStatusCode(), response.body().asString());
     }
 
     @Then("the get agency response matches the create payload name {string} address {string} phone {string} email {string}")
@@ -129,6 +149,7 @@ public class LoginStepDefinitions {
         assert expectedAddress.equals(actualAddress) : "address: expected " + expectedAddress + ", actual " + actualAddress;
         assert expectedPhone.equals(actualPhone) : "phone: expected " + expectedPhone + ", actual " + actualPhone;
         assert expectedEmail.equals(actualEmail) : "email: expected " + expectedEmail + ", actual " + actualEmail;
+        log.info("GetById response matches create payload: name={}, address={}, phone={}, email={}", actualName, actualAddress, actualPhone, actualEmail);
     }
 
     private String firstNonNullPath(String[] paths) {
