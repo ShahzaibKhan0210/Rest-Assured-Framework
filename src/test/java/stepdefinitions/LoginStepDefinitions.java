@@ -133,10 +133,10 @@ public class LoginStepDefinitions {
         String expectedAddress = createAddress != null ? createAddress : address;
         String expectedPhone = createPhone != null ? createPhone : phone;
         String expectedEmail = createEmail != null ? createEmail : email;
-        String[] namePaths = {"agency.name", "data.agency.name", "data.name", "name"};
-        String[] addressPaths = {"agency.address", "data.agency.address", "data.address", "address"};
-        String[] phonePaths = {"agency.phone", "data.agency.phone", "data.phone", "phone"};
-        String[] emailPaths = {"agency.email", "data.agency.email", "data.email", "email"};
+        String[] namePaths = {"response.name", "agency.name", "data.agency.name", "data.name", "name"};
+        String[] addressPaths = {"response.address", "agency.address", "data.agency.address", "data.address", "address"};
+        String[] phonePaths = {"response.phone", "agency.phone", "data.agency.phone", "data.phone", "phone"};
+        String[] emailPaths = {"response.email", "agency.email", "data.agency.email", "data.email", "email"};
         String actualName = firstNonNullPath(namePaths);
         String actualAddress = firstNonNullPath(addressPaths);
         String actualPhone = firstNonNullPath(phonePaths);
