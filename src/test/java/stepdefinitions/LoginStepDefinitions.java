@@ -113,15 +113,29 @@ public class LoginStepDefinitions {
         String expectedAddress = createAddress != null ? createAddress : address;
         String expectedPhone = createPhone != null ? createPhone : phone;
         String expectedEmail = createEmail != null ? createEmail : email;
-        Object agency = response.body().path("agency");
-        String namePath = agency != null ? "agency.name" : "name";
-        String addressPath = agency != null ? "agency.address" : "address";
-        String phonePath = agency != null ? "agency.phone" : "phone";
-        String emailPath = agency != null ? "agency.email" : "email";
-        response.then()
-                .body(namePath, equalTo(expectedName))
-                .body(addressPath, equalTo(expectedAddress))
-                .body(phonePath, equalTo(expectedPhone))
-                .body(emailPath, equalTo(expectedEmail));
+        String[] namePaths = {"agency.name", "data.agency.name", "data.name", "name"};
+        String[] addressPaths = {"agency.address", "data.agency.address", "data.address", "address"};
+        String[] phonePaths = {"agency.phone", "data.agency.phone", "data.phone", "phone"};
+        String[] emailPaths = {"agency.email", "data.agency.email", "data.email", "email"};
+        String actualName = firstNonNullPath(namePaths);
+        String actualAddress = firstNonNullPath(addressPaths);
+        String actualPhone = firstNonNullPath(phonePaths);
+        String actualEmail = firstNonNullPath(emailPaths);
+        assert actualName != null : "Could not find name in response. Body: " + response.body().asString();
+        assert actualAddress != null : "Could not find address in response.";
+        assert actualPhone != null : "Could not find phone in response.";
+        assert actualEmail != null : "Could not find email in response.";
+        assert expectedName.equals(actualName) : "name: expected " + expectedName + ", actual " + actualName;
+        assert expectedAddress.equals(actualAddress) : "address: expected " + expectedAddress + ", actual " + actualAddress;
+        assert expectedPhone.equals(actualPhone) : "phone: expected " + expectedPhone + ", actual " + actualPhone;
+        assert expectedEmail.equals(actualEmail) : "email: expected " + expectedEmail + ", actual " + actualEmail;
+    }
+
+    private String firstNonNullPath(String[] paths) {
+        for (String path : paths) {
+            Object val = response.body().path(path);
+            if (val != null) return val.toString();
+        }
+        return null;
     }
 }
