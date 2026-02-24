@@ -33,6 +33,23 @@ public class LoginStepDefinitions {
         response = request.body(body).when().post(loginEndpoint);
     }
 
+    @Given("the create agency API endpoint is {string}")
+    public void the_create_agency_api_endpoint_is(String endpoint) {
+        this.loginEndpoint = endpoint;
+        this.request = RestAssured.given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON);
+    }
+
+    @When("I send a POST request to create agency with name {string} address {string} phone {string} email {string}")
+    public void i_send_a_post_request_to_create_agency_with_name_address_phone_email(String name, String address, String phone, String email) {
+        String body = String.format(
+                "{\"name\":\"%s\",\"address\":\"%s\",\"phone\":\"%s\",\"email\":\"%s\"}",
+                name, address, phone, email
+        );
+        response = request.body(body).when().post(loginEndpoint);
+    }
+
     @Then("the response status code is {int}")
     public void the_response_status_code_is(int expectedStatus) {
         response.then().statusCode(expectedStatus);
