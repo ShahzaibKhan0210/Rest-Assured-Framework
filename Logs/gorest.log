@@ -111,3 +111,190 @@
 
 19:12:54[main] INFO  gorest - All data is being logged in log file
 
+21:50:32[main] INFO  gorest - *****testGetRequest User Details Saved to gorest.log *****
+
+21:50:32[main] INFO  gorest - [
+    {
+        "id": 8384246,
+        "name": "Bhagwanti Desai",
+        "email": "bhagwanti_desai@langosh-mckenzie.test",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384245,
+        "name": "Rajinder Kocchar",
+        "email": "kocchar_rajinder@bradtke.test",
+        "gender": "female",
+        "status": "active"
+    },
+    {
+        "id": 8384244,
+        "name": "Manjusha Ahuja",
+        "email": "manjusha_ahuja@windler.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384243,
+        "name": "Mr. Chandravati Dwivedi",
+        "email": "mr_dwivedi_chandravati@schaefer.test",
+        "gender": "female",
+        "status": "inactive"
+    },
+    {
+        "id": 8384242,
+        "name": "Gopal Chopra",
+        "email": "gopal_chopra@kautzer.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384241,
+        "name": "Amb. Aatreya Adiga",
+        "email": "adiga_aatreya_amb@shields.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384240,
+        "name": "Dhanadeepa Naik",
+        "email": "dhanadeepa_naik@lueilwitz.example",
+        "gender": "male",
+        "status": "active"
+    },
+    {
+        "id": 8384239,
+        "name": "Vyas Asan",
+        "email": "vyas_asan@swift.example",
+        "gender": "male",
+        "status": "active"
+    },
+    {
+        "id": 8384238,
+        "name": "Bhaaswar Ganaka",
+        "email": "ganaka_bhaaswar@ullrich-weimann.test",
+        "gender": "female",
+        "status": "active"
+    },
+    {
+        "id": 8384237,
+        "name": "Dandak Nayar",
+        "email": "dandak_nayar@ziemann.test",
+        "gender": "male",
+        "status": "inactive"
+    }
+]
+21:56:29[main] INFO  gorest - TestName: testPostRequest
+21:56:29[main] INFO  gorest - Author Name: shahzaibkhan
+21:56:34[main] INFO  gorest - *****testPostRequest-- data saved in gorest.log  *****
+
+21:56:34[main] INFO  gorest - {
+    "id": 8384307,
+    "name": "Susie Heathcote",
+    "email": "nicky.leannon@yahoo.com",
+    "gender": "male",
+    "status": "inactive"
+}
+21:56:34[main] INFO  gorest - Test Case: testPostRequest is passed.
+
+21:56:34[main] INFO  gorest - TestName: testGetRequest
+21:56:34[main] INFO  gorest - Author Name: shahzaibkhan
+21:56:34[main] INFO  gorest - *****testGetRequest User Details Saved to gorest.log *****
+
+21:56:34[main] INFO  gorest - [
+    {
+        "id": 8384246,
+        "name": "Bhagwanti Desai",
+        "email": "bhagwanti_desai@langosh-mckenzie.test",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384245,
+        "name": "Rajinder Kocchar",
+        "email": "kocchar_rajinder@bradtke.test",
+        "gender": "female",
+        "status": "active"
+    },
+    {
+        "id": 8384244,
+        "name": "Manjusha Ahuja",
+        "email": "manjusha_ahuja@windler.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384243,
+        "name": "Mr. Chandravati Dwivedi",
+        "email": "mr_dwivedi_chandravati@schaefer.test",
+        "gender": "female",
+        "status": "inactive"
+    },
+    {
+        "id": 8384242,
+        "name": "Gopal Chopra",
+        "email": "gopal_chopra@kautzer.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384241,
+        "name": "Amb. Aatreya Adiga",
+        "email": "adiga_aatreya_amb@shields.example",
+        "gender": "male",
+        "status": "inactive"
+    },
+    {
+        "id": 8384240,
+        "name": "Dhanadeepa Naik",
+        "email": "dhanadeepa_naik@lueilwitz.example",
+        "gender": "male",
+        "status": "active"
+    },
+    {
+        "id": 8384239,
+        "name": "Vyas Asan",
+        "email": "vyas_asan@swift.example",
+        "gender": "male",
+        "status": "active"
+    },
+    {
+        "id": 8384238,
+        "name": "Bhaaswar Ganaka",
+        "email": "ganaka_bhaaswar@ullrich-weimann.test",
+        "gender": "female",
+        "status": "active"
+    },
+    {
+        "id": 8384237,
+        "name": "Dandak Nayar",
+        "email": "dandak_nayar@ziemann.test",
+        "gender": "male",
+        "status": "inactive"
+    }
+]
+21:56:34[main] INFO  gorest - Test Case: testGetRequest is passed.
+
+21:56:34[main] INFO  gorest - TestName: testPatchRequest
+21:56:34[main] INFO  gorest - Author Name: shahzaibkhan
+21:56:35[main] INFO  gorest - *****testPatchRequest-- data saved in gorest.log  *****
+
+21:56:35[main] INFO  gorest - {
+    "email": "megan.huel@gmail.com",
+    "name": "Susie Heathcote",
+    "gender": "male",
+    "status": "active",
+    "id": 8384307
+}
+21:56:35[main] INFO  gorest - Test Case: testPatchRequest is passed.
+
+21:56:35[main] INFO  gorest - TestName: testDeleteRequest
+21:56:35[main] INFO  gorest - Author Name: shahzaibkhan
+21:56:36[main] INFO  gorest - *****testDeleteRequest-- data saved in gorest.log  *****
+
+21:56:36[main] INFO  gorest - 
+21:56:36[main] INFO  gorest - Test Case: testDeleteRequest is passed.
+
+21:56:36[main] INFO  gorest - All data is being logged in log file
+
